@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmácia Yolela — Angola</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde:        #1b5e35;
+  --verde-med:    #2e7d4f;
+  --verde-light:  #4caf72;
+  --verde-pale:   #e8f5ee;
+  --verde-fundo:  #f0f7f3;
+  --branco:       #ffffff;
+  --azul-barra:   #1565c0;
+  --texto:        #182018;
+  --texto-sec:    #4a5a4e;
+  --borda:        #d4e6da;
+  --radius:       12px;
+  --sombra:       0 4px 20px rgba(27,94,53,.10);
+  --sombra-hover: 0 10px 36px rgba(27,94,53,.18);
+  --sombra-btn:   0 4px 14px rgba(27,94,53,.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--verde-fundo);
+  color: var(--texto);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(27, 94, 53, 0.52);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  transition: background .35s;
+}
+header.scrolled { background: rgba(27, 94, 53, 0.92); }
+.header-inner {
+  max-width: 1140px; margin: 0 auto;
+  padding: 0 28px; height: 66px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+.logo-icon { width: 64px; height: 64px; flex-shrink: 0; object-fit: contain; }
+.logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+.logo-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: 1.05rem; color: #fff; letter-spacing: .1px;
+}
+.logo-sub {
+  font-size: .6rem; font-weight: 400; font-family: 'Poppins', sans-serif;
+  color: rgba(255,255,255,.55); letter-spacing: 1.4px; text-transform: uppercase;
+}
+nav { display: flex; align-items: center; gap: 30px; }
+nav a {
+  color: rgba(255,255,255,.78); text-decoration: none;
+  font-size: .83rem; font-weight: 500; font-family: 'Poppins', sans-serif;
+  transition: color .2s;
+}
+nav a:hover { color: #fff; }
+.hamburger {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; width: 36px; height: 36px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px; background: #fff;
+  border-radius: 2px; transition: transform .3s ease, opacity .3s ease, width .3s ease;
+  transform-origin: center;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; width: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-nav {
+  display: none; flex-direction: column;
+  background: rgba(27,94,53,.97);
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 20px 28px 24px; gap: 18px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  color: rgba(255,255,255,.82); text-decoration: none;
+  font-size: .95rem; font-weight: 500; transition: color .2s;
+}
+.mobile-nav a:hover { color: #fff; }
+
+/* ── APRESENTAÇÃO ── */
+.apresentacao {
+  background: linear-gradient(135deg, #16542f 0%, #1f7a44 35%, #2e7d4f 65%, #174d2c 100%);
+  background-size: 220% 220%;
+  padding: 118px 28px 68px;
+  position: relative;
+  overflow: hidden;
+  animation: ambientGradient 12s ease infinite;
+}
+.apresentacao::before {
+  content: '';
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255,255,255,.10) 0%, transparent 70%);
+  pointer-events: none;
+  animation: floatGlow 10s ease-in-out infinite;
+}
+.apresentacao::after {
+  content: '';
+  position: absolute;
+  right: -8%;
+  bottom: -35%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(168,223,192,.16) 0%, transparent 70%);
+  pointer-events: none;
+  animation: floatGlow 14s ease-in-out infinite reverse;
+}
+.apresentacao-inner {
+  max-width: 680px; margin: 0 auto;
+  text-align: center; position: relative; z-index: 1;
+}
+.apres-tag {
+  display: inline-block; font-family: 'Poppins', sans-serif;
+  font-size: .7rem; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,.5); margin-bottom: 18px;
+}
+.apresentacao h1 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #fff; line-height: 1.22;
+  margin-bottom: 22px; letter-spacing: -.2px;
+}
+.apresentacao h1 em { font-style: italic; color: #a8dfc0; }
+.apresentacao p {
+  font-family: 'Poppins', sans-serif;
+  color: rgba(255,255,255,.6); font-size: .95rem; font-weight: 300;
+  max-width: 520px; margin: 0 auto; line-height: 1.85;
+}
+
+/* ── IMAGEM HERO ── */
+.hero-img-wrapper { width: 100%; max-height: 500px; overflow: hidden; position: relative; }
+.hero-img-wrapper img {
+  width: 100%; height: 500px; object-fit: cover; object-position: center; display: block;
+  filter: brightness(.86) saturate(1.05);
+}
+.hero-img-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+  background: linear-gradient(to top, var(--verde-fundo) 0%, transparent 100%);
+}
+
+/* ── BARRA ANIMADA (azul) ── */
+.barra-animada { background: var(--azul-barra); overflow: hidden; padding: 13px 0; }
+.barra-track {
+  display: flex; align-items: center;
+  animation: slideLeft 40s linear infinite; width: max-content;
+}
+.barra-track span {
+  font-family: 'Poppins', sans-serif;
+  font-size: .83rem; font-weight: 500;
+  color: rgba(255,255,255,.88); letter-spacing: .3px;
+  padding: 0 36px; white-space: nowrap;
+}
+.barra-track .sep { color: rgba(255,255,255,.35); padding: 0; }
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes ambientGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatGlow {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(20px, -18px, 0) scale(1.08); }
+}
+
+/* ── DICAS ROTATIVAS ── */
+.dicas {
+  background: var(--verde-med); padding: 68px 28px;
+  text-align: center; position: relative; overflow: hidden;
+  border-radius: 0 0 24px 24px;
+}
+.dicas-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,.42); margin-bottom: 32px;
+}
+.dica-box {
+  min-height: 72px; display: flex;
+  align-items: center; justify-content: center; position: relative;
+}
+.dica-texto {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.8vw, 1.8rem); font-weight: 600;
+  color: #fff; line-height: 1.45; max-width: 660px;
+  margin: 0 auto; position: absolute; width: 100%;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.dica-texto.active { opacity: 1; transform: translateY(0); position: relative; }
+.dicas-dots { display: flex; justify-content: center; gap: 7px; margin-top: 28px; }
+.dicas-dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  transition: background .3s, transform .3s; cursor: pointer;
+}
+.dicas-dots span.active { background: rgba(255,255,255,.85); transform: scale(1.35); }
+
+/* ── SECÇÕES ── */
+section.sec { padding: 72px 28px; }
+section.sec.alt { background: var(--branco); }
+.container { max-width: 1140px; margin: 0 auto; }
+.sec-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--verde-light); margin-bottom: 8px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.55rem, 3.2vw, 2.1rem);
+  color: var(--verde); margin-bottom: 6px; letter-spacing: -.1px;
+}
+.sec-divider {
+  width: 36px; height: 2px; background: var(--verde-light);
+  margin-bottom: 44px; border-radius: 2px;
+}
+
+/* ── CARDS ── */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.card {
+  background: var(--branco); border: 1px solid var(--borda);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--sombra);
+  transition: transform .25s ease, box-shadow .25s ease;
+  display: flex; flex-direction: column;
+}
+.card:hover { transform: translateY(-5px); box-shadow: var(--sombra-hover); }
+.card-img {
+  width: 100%; height: 148px; object-fit: cover;
+  object-position: center; display: block;
+}
+.card-body {
+  padding: 16px 18px 20px;
+  display: flex; flex-direction: column; flex: 1; align-items: center; text-align: center;
+}
+.card-nome {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600; font-size: 1rem; color: var(--verde); margin-bottom: 6px;
+}
+.card-desc {
+  font-family: 'Poppins', sans-serif;
+  font-size: .78rem; color: var(--texto-sec);
+  font-weight: 300; line-height: 1.6; flex: 1; margin-bottom: 16px;
+}
+.btn-wa {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 7px; background: var(--verde); color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: .84rem; font-weight: 600;
+  padding: 11px 22px; border-radius: 8px; text-decoration: none;
+  box-shadow: var(--sombra-btn); white-space: nowrap;
+  transition: background .2s, transform .15s, box-shadow .2s; width: 100%;
+}
+.btn-wa:hover {
+  background: var(--verde-med); transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(27,94,53,.32);
+}
+
+/* ── SERVIÇOS ── */
+section.servicos { background: var(--verde); padding: 72px 28px; }
+section.servicos .sec-label { color: rgba(255,255,255,.45); }
+section.servicos .sec-title { color: #fff; }
+section.servicos .sec-divider { background: rgba(255,255,255,.3); }
+.servicos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.serv-card {
+  background: var(--branco); border: 1px solid var(--borda);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--sombra); display: flex; flex-direction: column;
+  transition: transform .25s, box-shadow .25s;
+}
+.serv-card:hover { transform: translateY(-5px); box-shadow: var(--sombra-hover); }
+.serv-img { width: 100%; height: 148px; object-fit: cover; object-position: center; display: block; }
+.serv-body {
+  padding: 18px 18px 20px; display: flex; flex-direction: column;
+  flex: 1; align-items: center; text-align: center;
+}
+.serv-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 600; color: var(--verde); margin-bottom: 6px;
+}
+.serv-desc {
+  font-family: 'Poppins', sans-serif;
+  font-size: .78rem; color: var(--texto-sec);
+  font-weight: 300; line-height: 1.6; flex: 1; margin-bottom: 16px;
+}
+.btn-serv {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 7px; background: var(--verde-med); color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: .84rem; font-weight: 600;
+  padding: 11px 22px; border-radius: 8px; text-decoration: none; width: 100%;
+  box-shadow: var(--sombra-btn); white-space: nowrap;
+  transition: background .2s, transform .15s;
+}
+.btn-serv:hover { background: var(--verde); transform: translateY(-1px); }
+
+/* ── CTA SIMPLES ── */
+.cta-simples {
+  background: var(--verde-pale); padding: 60px 28px; text-align: center;
+  border-top: 1px solid var(--borda); border-bottom: 1px solid var(--borda);
+}
+.cta-simples p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 3vw, 1.85rem);
+  font-weight: 600; color: var(--verde); line-height: 1.45;
+}
+.cta-simples p em { font-style: italic; color: var(--verde-med); }
+
+/* ── LOCALIZAÇÃO ── */
+section.localizacao { padding: 72px 28px; background: var(--branco); }
+.loc-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; align-items: start; }
+.loc-info { display: flex; flex-direction: column; gap: 26px; }
+.loc-item { display: flex; align-items: flex-start; gap: 14px; }
+.loc-item-icon {
+  width: 38px; height: 38px; border-radius: 8px;
+  border: 1.5px solid var(--borda);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--verde); flex-shrink: 0;
+}
+.loc-item-text h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: .83rem; font-weight: 600; color: var(--verde); margin-bottom: 3px;
+}
+.loc-item-text p,
+.loc-item-text a {
+  font-family: 'Poppins', sans-serif;
+  font-size: .82rem; color: var(--texto-sec);
+  font-weight: 300; text-decoration: none; display: block; line-height: 1.7;
+}
+.loc-item-text a:hover { color: var(--verde); }
+.loc-map {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--borda); box-shadow: var(--sombra);
+}
+.loc-map iframe { width: 100%; height: 340px; display: block; border: none; }
+
+/* ── FOOTER ── */
+footer { background: var(--verde); }
+.footer-inner {
+  max-width: 1140px; margin: 0 auto; padding: 48px 28px 32px;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px;
+}
+.footer-brand p {
+  font-family: 'Poppins', sans-serif;
+  color: rgba(255,255,255,.42); font-size: .8rem; font-weight: 300;
+  margin-top: 14px; line-height: 1.75; max-width: 230px;
+}
+.footer-col h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: .66rem; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,.38); margin-bottom: 14px;
+}
+.footer-col a, .footer-col p {
+  font-family: 'Poppins', sans-serif;
+  display: block; color: rgba(255,255,255,.5);
+  font-size: .82rem; font-weight: 300; text-decoration: none;
+  margin-bottom: 8px; transition: color .2s;
+}
+.footer-col a:hover { color: rgba(255,255,255,.88); }
+.footer-wa {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; background: #fff; color: var(--verde);
+  font-family: 'Poppins', sans-serif;
+  font-size: .82rem; font-weight: 600;
+  padding: 12px 24px; border-radius: 8px;
+  text-decoration: none; margin-top: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
+  transition: background .2s, transform .15s;
+}
+.footer-wa:hover { background: #e8f5ee; transform: translateY(-1px); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08); padding: 20px 28px;
+  max-width: 1140px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-bottom p { font-family: 'Poppins', sans-serif; color: rgba(255,255,255,.25); font-size: .72rem; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { display: none; }
+  .hamburger { display: flex; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .servicos-grid { grid-template-columns: repeat(2, 1fr); }
+  .loc-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 26px; }
+  .footer-brand p { max-width: 100%; }
+}
+@media (max-width: 540px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .servicos-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img class="logo-icon" src="img/logo.png" alt="Logotipo da Farmácia Yolela">
+      <div class="logo-text">
+        <span class="logo-name">Farmácia Yolela</span>
+        <span class="logo-sub">Angola</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#produtos">Produtos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#localizacao">Localização</a>
+      <a href="https://wa.me/244928946896?text=Olá%2C%20vi%20o%20vosso%20site%20e%20quero%20mais%20informações." target="_blank">Contacto</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#produtos" onclick="closeMobileNav()">Produtos</a>
+    <a href="#servicos" onclick="closeMobileNav()">Serviços</a>
+    <a href="#localizacao" onclick="closeMobileNav()">Localização</a>
+    <a href="https://wa.me/244928946896?text=Olá%2C%20vi%20o%20vosso%20site%20e%20quero%20mais%20informações." target="_blank" onclick="closeMobileNav()">Contacto</a>
+  </div>
+</header>
+
+<!-- APRESENTAÇÃO -->
+<section class="apresentacao">
+  <div class="apresentacao-inner">
+    <div class="apres-tag"></div>
+    <h1>Saúde, cuidado<br>e <em>confiança</em> perto de si</h1>
+    <p>A Farmácia Yolela é a sua farmácia de confiança, com produtos de qualidade, atendimento humano e serviços de saúde disponíveis 24 horas por dia, todos os dias do ano.</p>
+  </div>
+</section>
+
+<!-- IMAGEM HERO -->
+<div class="hero-img-wrapper">
+  <img src="img/hero.jpg" alt="Interior de farmácia moderna e profissional">
+  <div class="hero-img-overlay"></div>
+</div>
+
+<!-- BARRA ANIMADA (azul) -->
+<div class="barra-animada">
+  <div class="barra-track">
+    <span>Bem-vindo à Farmácia Yolela</span>
+    <span class="sep">·</span>
+    <span>Estamos abertos 24h/24 de segunda a domingo</span>
+    <span class="sep">·</span>
+    <span></span>
+    <span class="sep">·</span>
+    <span>Fale connosco agora pelo WhatsApp</span>
+    <span class="sep">·</span>
+    <span>Bem-vindo à Farmácia Yolela</span>
+    <span class="sep">·</span>
+    <span>Estamos abertos 24h/24 de segunda a domingo</span>
+    <span class="sep">·</span>
+    <span></span>
+    <span class="sep">·</span>
+    <span>Fale connosco agora pelo WhatsApp</span>
+    <span class="sep">·</span>
+  </div>
+</div>
+
+<!-- DICAS ROTATIVAS -->
+<div class="dicas">
+  <div class="dicas-label">Cuidados de Saúde</div>
+  <div class="dica-box">
+    <div class="dica-texto active">Pequenos cuidados diários evitam grandes problemas de saúde.</div>
+    <div class="dica-texto">Hidrate a pele todos os dias. O corpo também precisa de atenção.</div>
+    <div class="dica-texto">Meça a sua pressão regularmente. A hipertensão não avisa antes de agir.</div>
+    <div class="dica-texto">Em caso de ferimento, o primeiro socorro correcto faz toda a diferença.</div>
+    <div class="dica-texto">Cuide do cabelo com produtos adequados ao seu tipo.</div>
+    <div class="dica-texto">Pacientes acamados merecem os melhores cuidados. Temos o que precisa.</div>
+    <div class="dica-texto">Controle o açúcar no sangue. A diabetes silenciosa é a mais perigosa.</div>
+    <div class="dica-texto">Equipamentos de mobilidade devolvem independência e dignidade.</div>
+    <div class="dica-texto">Descartáveis de qualidade protegem quem cuida e quem é cuidado.</div>
+    <div class="dica-texto">A sua saúde não tem preço. Invista nela todos os dias.</div>
+  </div>
+  <div class="dicas-dots" id="dicas-dots">
+    <span class="active"></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</div>
+
+<!-- MEDICAMENTOS -->
+<section class="sec" id="produtos">
+  <div class="container">
+    <div class="sec-label reveal">Farmacêutico</div>
+    <h2 class="sec-title reveal">Medicamentos</h2>
+    <div class="sec-divider reveal"></div>
+    <div class="cards-grid">
+
+      <div class="card reveal">
+        <img class="card-img" src="img/comprimido.jpg" alt="Comprimidos">
+        <div class="card-body">
+          <div class="card-nome">Comprimidos</div>
+          <div class="card-desc">Analgésicos, anti-inflamatórios e vitaminas em comprimido.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20se%20têm%20um%20comprimido%20disponível." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/xarope.jpg" alt="Xarope">
+        <div class="card-body">
+          <div class="card-nome">Xaropes</div>
+          <div class="card-desc">Para tosse, gripe e garganta. Pediátrico e adulto.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20se%20têm%20um%20xarope%20disponível." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/pomada.jpg" alt="Pomadas">
+        <div class="card-body">
+          <div class="card-nome">Pomadas Medicinais</div>
+          <div class="card-desc">Para feridas, queimaduras e dores musculares.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20se%20têm%20uma%20pomada%20disponível." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/gota.png" alt="Gota">
+        <div class="card-body">
+          <div class="card-nome">Gotas e Colírios</div>
+          <div class="card-desc">Nasais, auriculares e oculares para alergias e irritações.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20se%20têm%20gotas%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COSMÉTICOS -->
+<section class="sec alt">
+  <div class="container">
+    <div class="sec-label reveal">Beleza e Pele</div>
+    <h2 class="sec-title reveal">Cuide de Si</h2>
+    <div class="sec-divider reveal"></div>
+    <div class="cards-grid">
+
+      <div class="card reveal">
+        <img class="card-img" src="img/creme.jpg" alt="Cremes hidratantes">
+        <div class="card-body">
+          <div class="card-nome">Cremes Hidratantes</div>
+          <div class="card-desc">Faciais e corporais para pele seca, sensível e mista.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20cremes%20têm%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/corporal.jpg" alt="Óleo corporal">
+        <div class="card-body">
+          <div class="card-nome">Óleos Corporais</div>
+          <div class="card-desc">Hidratação profunda. Ideais após o banho e massagem.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20óleos%20corporais%20têm%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/capilar.jpg" alt="Óleo capilar">
+        <div class="card-body">
+          <div class="card-nome">Óleos Capilares</div>
+          <div class="card-desc">Nutrição e brilho para cabelo seco e sem vida.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20óleos%20capilares%20têm%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/protetor.jpg" alt="Protetor solar">
+        <div class="card-body">
+          <div class="card-nome">Protetor Solar</div>
+          <div class="card-desc">Protecção facial e corporal. Vários factores disponíveis.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20protectores%20têm%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/bebe.jpg" alt="Linha para bebé">
+        <div class="card-body">
+          <div class="card-nome">Linha para Bebé</div>
+          <div class="card-desc">Cremes e óleos suaves para a pele delicada dos bebés.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20produtos%20para%20bebé%20têm." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPAMENTOS -->
+<section class="sec" id="equipamentos">
+  <div class="container">
+    <div class="sec-label reveal">Mobilidade e Cuidado</div>
+    <h2 class="sec-title reveal">Equipamentos e Descartáveis</h2>
+    <div class="sec-divider reveal"></div>
+    <div class="cards-grid">
+
+      <div class="card reveal">
+        <img class="card-img" src="img/muletas.jpg" alt="Muletas">
+        <div class="card-body">
+          <div class="card-nome">Muletas</div>
+          <div class="card-desc">Axilares e de antebraço para recuperação e mobilidade.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20se%20têm%20muletas%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/cadeiraderodas.jpg" alt="Cadeira de rodas">
+        <div class="card-body">
+          <div class="card-nome">Cadeira de Rodas</div>
+          <div class="card-desc">Manual, robusta e segura para uso doméstico e exterior.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20se%20têm%20cadeira%20de%20rodas%20disponível." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/seringas.png" alt="Seringas">
+        <div class="card-body">
+          <div class="card-nome">Seringas Descartáveis</div>
+          <div class="card-desc">Vários volumes. Embalagem individual e em caixa.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20seringas%20têm%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/luvas.png" alt="Luvas">
+        <div class="card-body">
+          <div class="card-nome">Luvas Descartáveis</div>
+          <div class="card-desc">Látex e nitrilo para procedimentos e cuidados domiciliários.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20luvas%20têm%20disponíveis." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <img class="card-img" src="img/fraldas.png" alt="Fraldas para adulto">
+        <div class="card-body">
+          <div class="card-nome">Fraldas para Adulto</div>
+          <div class="card-desc">Alta absorção para idosos e pacientes com incontinência.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20que%20fraldas%20para%20adulto%20têm." target="_blank" class="btn-wa">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicitar
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="servicos" id="servicos">
+  <div class="container">
+    <div class="sec-label reveal">Clínico</div>
+    <h2 class="sec-title reveal">Serviços de Saúde</h2>
+    <div class="sec-divider reveal"></div>
+    <div class="servicos-grid">
+
+      <div class="serv-card reveal">
+        <img class="serv-img" src="img/primeirosocorro.jpg" alt="Primeiro socorro">
+        <div class="serv-body">
+          <div class="serv-nome">Primeiro Socorro</div>
+          <div class="serv-desc">Atendimento imediato para ferimentos, quedas e queimaduras. Equipa disponível 24 horas.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20preciso%20de%20informações%20sobre%20o%20primeiro%20socorro." target="_blank" class="btn-serv">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar agora
+          </a>
+        </div>
+      </div>
+
+      <div class="serv-card reveal">
+        <img class="serv-img" src="img/pressaoarterial.jpg" alt="Pressão arterial">
+        <div class="serv-body">
+          <div class="serv-nome">Pressão Arterial</div>
+          <div class="serv-desc">Medição rápida e gratuita. Sem marcação. Um hábito que pode salvar a sua vida.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20mais%20sobre%20a%20medição%20de%20pressão%20arterial." target="_blank" class="btn-serv">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar agora
+          </a>
+        </div>
+      </div>
+
+      <div class="serv-card reveal">
+        <img class="serv-img" src="img/glicemia.jpg" alt="Medicação de glicemia">
+        <div class="serv-body">
+          <div class="serv-nome">Medição de Glicemia</div>
+          <div class="serv-desc">Resultado imediato. Rastreio de diabetes sem marcação prévia.</div>
+          <a href="https://wa.me/244928946896?text=Olá%2C%20quero%20saber%20mais%20sobre%20a%20medição%20de%20glicemia." target="_blank" class="btn-serv">
+            <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar agora
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA SIMPLES -->
+<div class="cta-simples">
+  <p>Venha cuidar da sua saúde. Estamos aqui para si — todos os dias, a qualquer hora.</p>
+</div>
+
+<!-- LOCALIZAÇÃO -->
+<section class="localizacao" id="localizacao">
+  <div class="container">
+    <div class="sec-label reveal">Como chegar</div>
+    <h2 class="sec-title reveal">Localização</h2>
+    <div class="sec-divider reveal"></div>
+    <div class="loc-grid">
+      <div class="loc-info">
+        <div class="loc-item reveal">
+          <div class="loc-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="loc-item-text">
+            <h4>Endereço</h4>
+            <p></p>
+          </div>
+        </div>
+        <div class="loc-item reveal">
+          <div class="loc-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.1a16 16 0 006 6l1.46-1.46a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <div class="loc-item-text">
+            <h4>Contacto</h4>
+            
+            
+            
+          </div>
+        </div>
+        <div class="loc-item reveal">
+          <div class="loc-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div class="loc-item-text">
+            <h4>WhatsApp</h4>
+            
+          </div>
+        </div>
+        <div class="loc-item reveal">
+          <div class="loc-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="loc-item-text">
+            <h4>Horário</h4>
+            <p>Segunda a Domingo · 24 horas</p>
+          </div>
+        </div>
+      </div>
+      <div class="loc-map reveal">
+        <iframe
+          src="about:blank"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localização Farmácia Yolela">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <svg class="logo-icon" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="17" cy="17" r="15.5" stroke="#fff" stroke-width="1.5"/>
+          <path d="M17 9v16M9 17h16" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">Farmácia Yolela</span>
+          <span class="logo-sub">Angola</span>
+        </div>
+      </a>
+      <p>A sua farmácia de confiança. Produtos de qualidade e serviços clínicos disponíveis 24 horas.</p>
+      <a href="https://wa.me/244928946896?text=Olá%2C%20vi%20o%20vosso%20site%20e%20quero%20mais%20informações." target="_blank" class="footer-wa">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+    <div class="footer-col">
+      <h4>Produtos</h4>
+      <a href="#produtos">Medicamentos</a>
+      <a href="#produtos">Cosméticos e Pele</a>
+      <a href="#equipamentos">Equipamentos</a>
+      <a href="#equipamentos">Descartáveis</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <p></p>
+      
+      
+      
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Farmácia Yolela. Todos os direitos reservados.</p>
+    <p></p>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('open');
+});
+function closeMobileNav() {
+  hamburger.classList.remove('active');
+  mobileNav.classList.remove('open');
+}
+
+const dicas = document.querySelectorAll('.dica-texto');
+const dots = document.querySelectorAll('#dicas-dots span');
+let dicaAtual = 0;
+let dicaTimer;
+
+function mostrarDica(index) {
+  dicas[dicaAtual].classList.remove('active');
+  dots[dicaAtual].classList.remove('active');
+  dicaAtual = index;
+  dicas[dicaAtual].classList.add('active');
+  dots[dicaAtual].classList.add('active');
+}
+
+dicaTimer = setInterval(() => {
+  mostrarDica((dicaAtual + 1) % dicas.length);
+}, 8000);
+
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    clearInterval(dicaTimer);
+    mostrarDica(i);
+    dicaTimer = setInterval(() => {
+      mostrarDica((dicaAtual + 1) % dicas.length);
+    }, 8000);
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
